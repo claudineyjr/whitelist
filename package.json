@@ -1,7 +1,7 @@
 {
   "name": "teste-middleware",
   "version": "1.0.0",
-  "description": "teste de middleware",
+  "description": "Example of CRUD implementation usign mongodb, mongoose, express and Node.js",
   "main": "index.js",
   "dependencies": {
     "app-module-path": "^2.2.0",
