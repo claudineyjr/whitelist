@@ -1,20 +1,22 @@
-const service = require('services/whitelist');
+const service = require('services/user');
 const { responseJson, responseErrorJson } = require('utils/controllers');
 const HttpStatus = require('http-status-codes');
 
-const verifyPermission = (req, res) => {
-  service.verifyPermission(req)
+const getUser = (req, res) => {
+  const { userId } = req.params;
+  service.getUser(userId)
     .then((result) => {
       if (!result) {
-        responseJson(res, result, HttpStatus.NO_CONTENT);
+        responseJson(res, result, HttpStatus.NOT_FOUND);
       }
       responseJson(res, result);
     })
-    .catch((error) => responseErrorJson(res, 'verifyPermission::get', error));
+    .catch((error) => responseErrorJson(res, 'getUser::get', error));
 };
 
 const insertNewRecord = (req, res) => {
-  service.insertNewRecord(req)
+  const newUser = req.body || {};
+  service.insertNewRecord(newUser)
     .then((result) => {
       responseJson(res, result);
     })
@@ -22,10 +24,11 @@ const insertNewRecord = (req, res) => {
 }
 
 const removeUser = (req, res) => {
-  service.removeUser(req)
+  const { userId } = req.params;
+  service.removeUser(userId)
     .then((result) => {
       if (!result) {
-        responseJson(res, null, HttpStatus.NO_CONTENT);
+        responseJson(res, null, HttpStatus.NOT_FOUND);
       }
       responseJson(res, result);
     })
@@ -35,5 +38,5 @@ const removeUser = (req, res) => {
 module.exports = {
   insertNewRecord,
   removeUser,
-  verifyPermission, 
+  getUser, 
 }

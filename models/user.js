@@ -1,7 +1,7 @@
 const conn = require('database/connection/mongo');
 const Schema = conn.mongoose.Schema;
 
-const WhitelistSchema = new Schema({
+const UserSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   userId: {
     type: String,
@@ -9,6 +9,6 @@ const WhitelistSchema = new Schema({
     unique: true,
   },
   data: Object
-}, { collection: 'whitelist' });
+}, { collection: 'Users' });
 
-module.exports = conn.model('Whitelist', WhitelistSchema);
+module.exports = conn.model('User', UserSchema);

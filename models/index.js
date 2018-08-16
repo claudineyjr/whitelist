@@ -1,5 +1,5 @@
-const Whitelist = require('./user');
+const User = require('./user');
 
 module.exports = exports = {
-  Whitelist,
+  User,
 }
